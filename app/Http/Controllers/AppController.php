@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contrat;
 use App\Models\Departement;
 use App\Models\Employer;
 use App\Models\User;
@@ -14,7 +15,8 @@ class AppController extends Controller
         $totalDepartements = Departement::all()->count();
         $totalEmployers = Employer::all()->count();
         $totalAdministrateurs = User::all()->count();
+        $totalContrats = Contrat::all()->count();
 
-        return view('dashboard',compact('totalDepartements', 'totalEmployers', 'totalAdministrateurs'));
+        return view('dashboard',compact('totalDepartements', 'totalEmployers', 'totalAdministrateurs','totalContrats'));
     }
 }

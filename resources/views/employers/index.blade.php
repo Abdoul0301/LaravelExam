@@ -76,7 +76,7 @@
                                     <th class="cell">Contact</th>
                                     <th class="cell">Sexe</th>
                                     <th class="cell">Adresse</th>
-                                    <th class="cell"></th>
+                                    <th class="cell">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -94,10 +94,7 @@
                                         <td class="cell">{{ $employer->adresse }}</td>
 
 
-                                        <td class="cell"><span
-                                                class="badge bg-success">{{ $employer->montant_journalier * 31 }}
-                                                Euro</span>
-                                        </td>
+
 
                                         <td class="cell">
                                             <a class="btn-sm app-btn-secondary"

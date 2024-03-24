@@ -41,6 +41,11 @@ class EmployerController extends Controller
         } catch (Exception $e) {
             dd($e);
         }
+
+        /*$query = Employer::create($request->all());
+        if ($query) {
+            return redirect()->route('employer.index')->with('success_message', 'Employer ajouté');
+        }*/
     }
 
     public function update(UpdateEmployerRequest $request, Employer $employer)

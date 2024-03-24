@@ -52,7 +52,7 @@
                         <tr>
                             <th class="cell">#</th>
                             <th class="cell">Nom</th>
-                            <th class="cell"></th>
+                            <th class="cell">Actions</th>
                         </tr>
                     </thead>
                     <tbody>

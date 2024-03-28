@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('adresse');
             $table->unsignedBigInteger('departement_id');
             $table->foreign('departement_id')->references('id')->on('departements');
+            $table->unsignedBigInteger('contrat_id');
+            $table->foreign('contrat_id')->references('id')->on('contrats');
             $table->timestamps();
         });
     }

@@ -16,6 +16,7 @@
                         @csrf
                         @method('PUT')
 
+
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">Departement</label>
                             <select name="departement_id" id="departement_id" class="form-control">
@@ -29,7 +30,26 @@
                             </select>
 
                             @error('departement_id')
-                                <div class="text-danger">{{ $message }}</div>
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label for="setting-input-3" class="form-label">Contrat</label>
+                            <select name="contrat_id" id="contrat_id" class="form-control">
+                                <option value=""></option>
+                                @foreach ($contrats as $contrat)
+                                    <option value="{{ $contrat->id }}"
+                                        {{ $employer->contrat_id === $contrat->id ? 'selected' : '' }}>
+                                        {{ $contrat->name }}</option>
+                                @endforeach
+
+                            </select>
+
+                            @error('contrat_id')
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
 
                         </div>
@@ -68,7 +88,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">Contact</label>
-                            <input type="text" class="form-control" id="setting-input-3" name="contact"
+                            <input type="number" class="form-control" id="setting-input-3" name="contact"
                                 placeholder="Entrer le contact" value="{{ $employer->contact }}">
 
 
@@ -77,13 +97,23 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="setting-input-3" class="form-label">Montant à journalier</label>
-                            <input type="number" class="form-control" id="setting-input-3" name="montant_journalier"
-                                value="{{ $employer->montant_journalier }}" placeholder="Entrer le montant journalier">
+                            <label for="setting-input-3" class="form-label">Sexe</label>
+                            <input type="text" class="form-control" id="setting-input-3" name="sexe"
+                                value="{{ $employer->sexe}}" placeholder="Entrer le sexe">
 
 
-                            @error('montant_journalier')
+                            @error('sexe')
                                 <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="setting-input-3" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" id="setting-input-3" name="adresse"
+                                   value="{{ $employer->adresse}}" placeholder="Entrer l'adresse">
+
+
+                            @error('adresse')
+                            <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <button type="submit" class="btn app-btn-primary">Mettre a jour</button>

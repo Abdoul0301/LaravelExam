@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeRequest;
 use App\Http\Requests\UpdateEmployerRequest;
+use App\Models\Contrat;
 use App\Models\Departement;
 use App\Models\Employer;
 use Exception;
@@ -13,7 +14,7 @@ class EmployerController extends Controller
 {
     public function index()
     {
-        $employers = Employer::with('departement')->paginate(10);
+        $employers = Employer::with('departement','contrat')->paginate(10);
         return view('employers.index', compact('employers'));
     }
 
@@ -21,14 +22,16 @@ class EmployerController extends Controller
     public function create()
     {
         $departements = Departement::all();
-        return view('employers.create', compact('departements'));
+        $contrats = Contrat::all();
+        return view('employers.create', compact('departements','contrats'));
     }
 
 
     public function edit(Employer $employer)
     {
         $departements = Departement::all();
-        return view('employers.edit', compact('employer', 'departements'));
+        $contrats = Contrat::all();
+        return view('employers.edit', compact('employer', 'departements','contrats'));
     }
 
     public function store(StoreEmployeRequest $request)
@@ -42,10 +45,7 @@ class EmployerController extends Controller
             dd($e);
         }
 
-        /*$query = Employer::create($request->all());
-        if ($query) {
-            return redirect()->route('employer.index')->with('success_message', 'Employer ajouté');
-        }*/
+
     }
 
     public function update(UpdateEmployerRequest $request, Employer $employer)
@@ -55,8 +55,11 @@ class EmployerController extends Controller
             $employer->prenom = $request->prenom;
             $employer->email = $request->email;
             $employer->contact = $request->contact;
+            $employer->sexe = $request->sexe;
+            $employer->adresse = $request->adresse;
             $employer->departement_id = $request->departement_id;
-            $employer->montant_journalier = $request->montant_journalier;
+            $employer->contrat_id = $request->contrat_id;
+
 
 
             $employer->update();

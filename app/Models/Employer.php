@@ -14,4 +14,9 @@ class Employer extends Model
     {
         return $this->belongsTo(Departement::class);
     }
+
+    public function contrat()
+    {
+        return $this->belongsTo(Contrat::class);
+    }
 }

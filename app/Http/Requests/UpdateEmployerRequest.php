@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEmployeRequest extends FormRequest
+class UpdateEmployerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,23 +25,22 @@ class StoreEmployeRequest extends FormRequest
             'departement_id' => 'required|integer',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'email' => 'required|unique:employers,email',
-            'contact' => 'required|unique:employers,contact',
+            'email' => 'required',
+            'contact' => 'required',
             'sexe' => 'required|string',
             'adresse' => 'required|string',
             'contrat_id' => 'required|integer',
-
         ];
-
     }
 
     public function messages()
     {
         return [
             'email.required' => 'Le mail est requis',
-            'email.unique' => 'Le mail est déja pris',
             'contact.required' => 'Le numero de téléphone est requis',
-            'contact.unique' => 'Le numero de telephone est déja pris'
+            'nom.required' => 'Le nom est requis',
+            'prenom.required' => 'Le prenom est requis'
+
         ];
     }
 }

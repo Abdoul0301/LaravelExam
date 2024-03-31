@@ -25,8 +25,8 @@ class StoreEmployeRequest extends FormRequest
             'departement_id' => 'required|integer',
             'nom' => 'required|string',
             'prenom' => 'required|string',
-            'email' => 'required|unique:employers,email',
-            'contact' => 'required|unique:employers,contact',
+            'email' => 'required',
+            'contact' => 'required',
             'sexe' => 'required|string',
             'adresse' => 'required|string',
             'contrat_id' => 'required|integer',
@@ -39,9 +39,8 @@ class StoreEmployeRequest extends FormRequest
     {
         return [
             'email.required' => 'Le mail est requis',
-            'email.unique' => 'Le mail est déja pris',
             'contact.required' => 'Le numero de téléphone est requis',
-            'contact.unique' => 'Le numero de telephone est déja pris'
+
         ];
     }
 }

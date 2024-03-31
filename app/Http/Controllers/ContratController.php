@@ -36,6 +36,7 @@ class ContratController extends Controller
         try {
 
             $contrat->name = $request->name;
+            $contrat->duree = $request->duree;
 
             $contrat->save();
 
@@ -46,9 +47,10 @@ class ContratController extends Controller
     }
     public function update(Contrat $contrat, saveContratRequest $request)
     {
-        //Enregistrer un nouveau Contrat
+
         try {
             $contrat->name = $request->name;
+            $contrat->duree = $request->duree;
 
             $contrat->update();
 

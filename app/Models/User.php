@@ -10,7 +10,18 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    protected $guarded = [''];
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function departement()
+    {
+        return $this->belongsTo(Departement::class);
+    }
+
+    public function contrat()
+    {
+        return $this->belongsTo(Contrat::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -21,6 +32,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'departement_id',
+        'contrat_id',
+        'contact',
+        'sexe',
+        'salaire',
+        'role' ,
+        'adresse',
+
     ];
 
     /**

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
+            $table->enum('type_absences', ['maladie', 'evenement', 'conges']);
+            $table->string('explication');
+            $table->string('date_debut');
+            $table->string('date_fin');
+            $table->enum('status', ['attente', 'valider', 'refuser'])->default('attente');
             $table->timestamps();
         });
     }

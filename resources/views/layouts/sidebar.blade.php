@@ -44,7 +44,7 @@
                                     d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
                             </svg>
                         </span>
-                        <span class="nav-link-text">Administrateurs</span>
+                        <span class="nav-link-text">Employers</span>
                         <span class="submenu-arrow">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -149,7 +149,10 @@
 
 
 
-                <li class="nav-item has-submenu">
+                {{--<li class="nav-item has-submenu">
+
+
+
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                     <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
                         data-bs-target="#submenu-4" aria-expanded="false" aria-controls="submenu-4">
@@ -185,7 +188,11 @@
 
                         </ul>
                     </div>
-                </li>
+                </li>--}}
+
+
+
+
 
 
                 <li class="nav-item has-submenu">
@@ -202,7 +209,7 @@
                                     d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z" />
                             </svg>
                         </span>
-                        <span class="nav-link-text">Employers</span>
+                        <span class="nav-link-text">Absence</span>
                         <span class="submenu-arrow">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down"
                                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -216,10 +223,10 @@
                     <div id="submenu-5" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link"
-                                                        href="#">Liste</a>
+                                                        href="{{ route('absence.index')}}">Liste</a>
                             </li>
                             <li class="submenu-item"><a class="submenu-link"
-                                                        href="#">Ajout</a>
+                                                        href="{{ route('absence.create') }}">Ajout</a>
                             </li>
 
                         </ul>

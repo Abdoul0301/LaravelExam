@@ -22,7 +22,8 @@ class saveContratRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:contrats,name'
+            'name' => 'required|unique:contrats,name',
+            'duree' => 'required'
         ];
     }
 
@@ -30,7 +31,8 @@ class saveContratRequest extends FormRequest
     {
         return [
             'name.required' => 'Le nom du contrat est requis',
-            'name.unique' => 'Le nom du contrat existe déja'
+            'name.unique' => 'Le nom du contrat existe déja',
+            'duree.required' => 'La durrée du contrat est requis'
         ];
     }
 }

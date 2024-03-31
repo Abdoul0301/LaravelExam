@@ -3,7 +3,7 @@
 @section('content')
     <div class="row g-3 mb-4 align-items-center justify-content-between">
         <div class="col-auto">
-            <h1 class="app-page-title mb-0">Administrateurs</h1>
+            <h1 class="app-page-title mb-0">Employes</h1>
         </div>
         <div class="col-auto">
             <div class="page-utilities">
@@ -25,7 +25,7 @@
                                 <path fill-rule="evenodd"
                                     d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
                             </svg>
-                            Ajouter Administrateur
+                            Ajouter Employe
                         </a>
                     </div>
                 </div>
@@ -58,9 +58,15 @@
                             <thead>
                                 <tr>
                                     <th class="cell">#</th>
-
                                     <th class="cell">Nom complet</th>
+                                    <th class="cell">Departement</th>
+                                    <th class="cell">Contrat</th>
                                     <th class="cell">Email</th>
+                                    <th class="cell">Contact</th>
+                                    <th class="cell">Sexe</th>
+                                    <th class="cell">Adresse</th>
+                                    <th class="cell">Salaire</th>
+                                    <th class="cell">Role</th>
                                     <th class="cell">Actions</th>
                                 </tr>
                             </thead>
@@ -69,13 +75,20 @@
                                 @forelse ($admins as $admin)
                                     <tr class="p-3">
                                         <td class="cell">{{ $admin->id }}</td>
-                                        <td>{{ $admin->name }}</td>
-                                        <td>{{ $admin->email }}</td>
+                                        <td class="cell">{{ $admin->name }}</td>
+                                        <td class="cell">{{ $admin->departement->name }}</td>
+                                        <td class="cell">{{ $admin->contrat->name }}</td>
+                                        <td class="cell">{{ $admin->email }}</td>
+                                        <td class="cell">{{ $admin->contact }}</td>
+                                        <td class="cell">{{ $admin->sexe }}</td>
+                                        <td class="cell">{{ $admin->adresse }}</td>
+                                        <td class="cell">{{ $admin->salaire }}</td>
+                                        <td class="cell">{{ $admin->role }}</td>
 
 
                                         <td class="cell">
-
-
+                                            <a class="btn-sm app-btn-secondary"
+                                               href="{{ route('administrateurs.edit', $admin->id) }}">Editer</a>
                                             <a class="btn-sm app-btn-secondary"
                                                 href="{{ route('administrateurs.delete', $admin->id) }}">Retirer</a>
                                         </td>

@@ -34,6 +34,17 @@
                             @enderror
                         </div>
 
+                        <div class="mb-3">
+                            <label for="setting-input-3" class="form-label">Durée</label>
+                            <input type="number" class="form-control" id="setting-input-3" name="duree"
+                                   placeholder="Entrer la duree" value="{{old('duree')}}">
+
+
+                            @error('duree')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <button type="submit" class="btn app-btn-primary">Enregistrer</button>
                     </form>
                 </div>

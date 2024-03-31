@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class storeAdminRequest extends FormRequest
+class saveAbsenceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,10 @@ class storeAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'departement_id' => 'required|integer',
-            'contrat_id' => 'required|integer',
-            'name' => 'required',
-            'email' => 'required',
-            'contact' => 'required',
-            'sexe' => 'required|string',
-            'salaire' => 'required',
-            'role' => 'required',
-            'adresse' => 'required|string',
+            'type_absences' => 'required',
+            'explication' => 'required',
+            'date_debut' => 'required',
+            'date_fin' => 'required',
 
 
         ];
@@ -39,10 +34,10 @@ class storeAdminRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'Le nom de l\'administrateur est requis',
-            'email.required' => 'Le mail est requis',
-
-
+            'type_absences.required' => 'Le type d\'absence est requis',
+            'explication.required' => 'L\'explication est requis',
+            'date_debut.required' => 'La date de debut est requis',
+            'date_fin.required' => 'La date de fin est requis',
         ];
     }
 }

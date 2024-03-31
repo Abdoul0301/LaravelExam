@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class storeAdminRequest extends FormRequest
+class updateAdminRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,25 +23,24 @@ class storeAdminRequest extends FormRequest
     {
         return [
             'departement_id' => 'required|integer',
-            'contrat_id' => 'required|integer',
-            'name' => 'required',
+            'name' => 'required|string',
             'email' => 'required',
             'contact' => 'required',
             'sexe' => 'required|string',
-            'salaire' => 'required',
-            'role' => 'required',
             'adresse' => 'required|string',
-
-
+            'salaire' => 'required',
+            'contrat_id' => 'required|integer',
+            'role' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Le nom de l\'administrateur est requis',
             'email.required' => 'Le mail est requis',
-
+            'contact.required' => 'Le numero de téléphone est requis',
+            'nom.required' => 'Le nom est requis',
+            'prenom.required' => 'Le prenom est requis'
 
         ];
     }

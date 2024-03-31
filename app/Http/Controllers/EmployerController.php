@@ -48,7 +48,7 @@ class EmployerController extends Controller
 
     }
 
-    public function update(UpdateEmployerRequest $request, Employer $employer)
+    public function update(Employer $employer, UpdateEmployerRequest $request)
     {
         try {
             $employer->nom = $request->nom;

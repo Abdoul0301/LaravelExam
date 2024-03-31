@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbsenceController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
@@ -37,6 +38,16 @@ Route::middleware('auth')->group(function () {
     });
 
 
+    Route::prefix('absences')->group(function () {
+        Route::get('/', [\App\Http\Controllers\AbsenceController::class, 'index'])->name('absence.index');
+        Route::get('/create', [AbsenceController::class, 'create'])->name('absence.create');
+        Route::post('/create', [AbsenceController::class, 'store'])->name('absence.store');
+        Route::get('/edit/{absence}', [AbsenceController::class, 'edit'])->name('absence.edit');
+        Route::put('/update/{absence}', [AbsenceController::class, 'update'])->name('absence.update');
+        Route::get('/{absence}', [AbsenceController::class, 'delete'])->name('absence.delete');
+    });
+
+
     Route::prefix('contrats')->group(function () {
         Route::get('/', [\App\Http\Controllers\ContratController::class, 'index'])->name('contrat.index');
         Route::get('/create', [\App\Http\Controllers\ContratController::class, 'create'])->name('contrat.create');
@@ -59,9 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('administrateurs')->group(function () {
 
         Route::get('/', [AdminController::class, 'index'])->name('administrateurs');
-
+        Route::get('/edit/{user}', [AdminController::class, 'edit'])->name('administrateurs.edit');
         Route::get('/create', [AdminController::class, 'create'])->name('administrateurs.create');
-
+        Route::put('/update/{user}', [AdminController::class, 'update'])->name('administrateurs.update');
         Route::post('/create', [AdminController::class, 'store'])->name('administrateurs.store');
         Route::get('/delete/{user}', [AdminController::class, 'delete'])->name('administrateurs.delete');
     });

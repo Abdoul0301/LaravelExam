@@ -45,6 +45,7 @@
                     <thead>
                         <tr>
                             <th class="cell">#</th>
+                            <th class="cell">Employé</th>
                             <th class="cell">Type</th>
                             <th class="cell">Explication</th>
                             <th class="cell">Date Début</th>
@@ -56,28 +57,39 @@
                     <tbody>
 
                         @forelse ($absences as $absence)
-                            <tr>
-                                <td class="cell">{{ $absence->id}}</td>
-                                <td class="cell">{{ $absence->type_absences}}</td>
-                                <td class="cell">{{ $absence->explication}}</td>
-                                <td class="cell">{{ $absence->date_debut}}</td>
-                                <td class="cell">{{ $absence->date_fin}}</td>
-                                <td class="cell"><span class="badge bg-success">{{ $absence->status}}</span></td>
+                            @if(auth()->user()->id === $absence->user->id)
+                                <tr>
+                                    <td class="cell">{{ $absence->id}}</td>
+                                    <td class="cell">{{ $absence->user->name}}</td>
+                                    <td class="cell">{{ $absence->type_absences}}</td>
+                                    <td class="cell">{{ $absence->explication}}</td>
+                                    <td class="cell">{{ $absence->date_debut}}</td>
+                                    <td class="cell">{{ $absence->date_fin}}</td>
+                                    <td class="cell"><span class="badge bg-success">{{ $absence->status}}</span></td>
 
 
-                                <td class="cell"><a class="btn-sm app-btn-secondary"
-                                        href="{{ route('absence.edit', $absence->id) }}">Editer</a>
-                                    <a class="btn-sm app-btn-secondary"
-                                        href="{{ route('absence.delete', $absence->id) }}">Retirer</a>
-                                </td>
+                                    <td class="cell">
+                                        <a class="btn-sm app-btn-secondary"
+                                           href="{{ route('absence.delete', $absence->id) }}">Retirer</a>
 
-                            </tr>
+                                        @if(auth()->user()->role === 'administrateur')
+                                            <!-- Afficher le bouton pour l'administrateur -->
+                                            <a class="btn-sm app-btn-secondary"
+                                               href="{{ route('absence.edit', $absence->id) }}">Editer</a>
+                                        @endif
+
+                                    </td>
+
+                                </tr>
+                            @endif
+                            @if(auth()->user()->id !== $absence->user->id)
+                                <tr>
+                                    <td class="cell" colspan="4">Aucun demande d'absence lier à {{auth()->user()->name}} </td>
+
+                                </tr>
+                            @endif
                         @empty
 
-                            <tr>
-                                <td class="cell" colspan="2">Aucun absence demander</td>
-
-                            </tr>
                         @endforelse
 
 

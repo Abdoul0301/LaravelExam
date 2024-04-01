@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/', [AuthController::class, 'handleLogin'])->name('handleLogin');
+Route::delete('/logout',[\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 Route::get('/validate-account/{email}', [AdminController::class, 'defineAccess']);
 Route::post('/validate-account/{email}', [AdminController::class, 'submitDefineAccess'])->name('submitDefineAccess');

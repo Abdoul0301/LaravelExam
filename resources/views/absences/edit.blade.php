@@ -17,6 +17,25 @@
                         @method('PUT')
 
 
+                        <div class="mb-3">
+                            <label for="setting-input-3" class="form-label">Employé</label>
+                            <select name="user_id" id="user_id" class="form-control">
+                                <option value=""></option>
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->id }}"
+                                        {{ $absence->user_id === $user->id ? 'selected' : '' }}>
+                                        {{ $user->name }}</option>
+                                @endforeach
+
+                            </select>
+
+                            @error('user_id')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+
+                        </div>
+
+
 
                         <div class="mb-3">
                             <label for="setting-input-3" class="form-label">type absences</label>

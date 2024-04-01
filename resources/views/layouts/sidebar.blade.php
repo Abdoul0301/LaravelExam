@@ -3,8 +3,8 @@
     <div class="sidepanel-inner d-flex flex-column">
         <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
         <div class="app-branding">
-            <a class="app-logo" href="index.html">
-                <span class="logo-text">All You Want</span>
+            <a class="app-logo" href="{{ route('dashboard') }}">
+                <span class="logo-text"> All You Want</span>
             </a>
 
         </div>
@@ -23,7 +23,7 @@
                                 <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
                             </svg>
                         </span>
-                        <span class="nav-link-text">Dashboard</span>
+                        <span class="nav-link-text">Acceuil</span>
                     </a>
                     <!--//nav-link-->
                 </li>
@@ -60,9 +60,11 @@
                             <li class="submenu-item"><a class="submenu-link"
                                     href="{{ route('administrateurs')}}">Liste</a>
                             </li>
-                            <li class="submenu-item"><a class="submenu-link"
-                                    href="{{ route('administrateurs.create')}}">Ajout</a>
-                            </li>
+                            @if(auth()->user()->role === 'administrateur')
+                                <li class="submenu-item"><a class="submenu-link"
+                                        href="{{ route('administrateurs.create')}}">Ajout</a>
+                                </li>
+                            @endif
 
                         </ul>
                     </div>
@@ -70,6 +72,7 @@
 
 
 
+                @if(auth()->user()->role === 'administrateur')
                 <li class="nav-item has-submenu">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                     <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
@@ -107,8 +110,10 @@
                         </ul>
                     </div>
                 </li>
+                @endif
 
 
+                @if(auth()->user()->role === 'administrateur')
                 <li class="nav-item has-submenu">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                     <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse"
@@ -146,6 +151,7 @@
                         </ul>
                     </div>
                 </li>
+                @endif
 
 
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\saveAbsenceRequest;
 use App\Models\Absence;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -11,20 +12,22 @@ class AbsenceController extends Controller
 {
     public function index()
     {
-        $absences = Absence::paginate(10);
+        $absences = Absence::with('user')->paginate(10);
         return view('absences.index', compact('absences'));
     }
 
 
     public function create()
     {
-        return view('absences.create');
+        $users = User::all();
+        return view('absences.create', compact('users'));
     }
 
 
     public function edit(Absence $absence)
     {
-        return view('absences.edit', compact('absence'));
+        $users = User::all();
+        return view('absences.edit', compact('absence','users'));
     }
 
 
@@ -34,7 +37,7 @@ class AbsenceController extends Controller
     {
         //Enregistrer un nouveau département
         try {
-
+            $absence->user_id = $request->user_id;
             $absence->type_absences = $request->type_absences;
             $absence->explication = $request->explication;
             $absence->date_debut = $request->date_debut;
@@ -52,6 +55,7 @@ class AbsenceController extends Controller
     {
         //Enregistrer un nouveau département
         try {
+            $absence->user_id = $request->user_id;
             $absence->type_absences = $request->type_absences;
             $absence->explication = $request->explication;
             $absence->date_debut = $request->date_debut;

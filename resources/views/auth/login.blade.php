@@ -35,7 +35,7 @@
             </div>
             <div class="right">
 
-                <h4>Espace administrateur</h4>
+                <h4>Espace d'authentification</h4>
 
                 @if (Session::get('success_msg'))
                     <div class="success_span">{{ Session::get('success_msg') }}</div>

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('absences', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->enum('type_absences', ['maladie', 'evenement', 'conges']);
             $table->string('explication');
             $table->string('date_debut');

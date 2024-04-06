@@ -7,10 +7,9 @@
         </div>
         <!--//col-->
         <div class="app-search-box col">
-            <form class="app-search-form">
-                <input type="text" placeholder="Rechercher un employer..." name="search" class="form-control search-input">
-                <button type="submit" class="btn search-btn btn-primary" value="Search"><i
-                        class="fas fa-search"></i></button>
+            <form action="{{route("search")}}" class="app-search-form">
+                <input type="text" placeholder="Rechercher un employer par son prénon..." name="search" class="form-control search-input">
+                <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
             </form>
         </div>
         <!--//app-search-box-->
@@ -65,7 +64,7 @@
             <div class="app-card app-card-orders-table shadow-sm mb-5">
                 <div class="app-card-body">
                     <div class="table-responsive">
-                        <table class="table app-table-hover mb-0 text-left table-striped table-bordered">
+                        <table class="table app-table-hover mb-0 text-left">
                             <thead>
                                 <tr>
                                     <th class="cell">#</th>

@@ -41,7 +41,7 @@ class SendEmailToAdminAfterRegistrationNotification extends Notification
         return (new MailMessage)
             ->subject('Création de compte administrateur')
             ->line('Bonjour')
-            ->line('Votre compte a été crée avec succès sur la plateforme de gestion de RH')
+            ->line('Votre compte a été crée avec succès sur la plateforme de gestion de RH de ALL YOU WANT')
             ->line('cliquez sur le bouton ci dessous pour valider votre compte')
             ->line('Saisissez le code '.$this->code. ' et renseigner le dans le formulaire qui appraitra lorsque vous cliquerez sur le bouton ci dessous')
             ->action('Cliquez ici', url('/validate-account' . '/' . $this->email))

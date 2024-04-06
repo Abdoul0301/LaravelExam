@@ -55,7 +55,7 @@ class AdminController extends Controller
             $user->departement_id = $request->departement_id;
             $user->contrat_id = $request->contrat_id;
             $user->role = $request->role;
-            $user->password = Hash::make('default');
+            $user->password = Hash::make('passer1234');
             $user->save();
 
             //Envoyer un mail pour que l'utilisateur puisse confirmer son compte
@@ -76,7 +76,7 @@ class AdminController extends Controller
 
                     //Rediriger l'utilisateur vers une URL
 
-                    return redirect()->route('administrateurs')->with('success_message', 'Administrateur ajouté');
+                    return redirect()->route('administrateurs')->with('success_message', 'Employé ajouté');
                 } catch (Exception $e) {
                     //dd($e);
                     throw new Exception('Une erreur est survenue lors de l\'envoie du mail');
@@ -105,7 +105,7 @@ class AdminController extends Controller
 
             $user->update();
 
-            return redirect()->route('administrateurs')->with('success_message', 'Les informations de l\'employer ont été mise à jour');
+            return redirect()->route('administrateurs')->with('success_message', 'Les informations de l\'employé ont été mise à jour');
 
         } catch (Exception $e) {
             //dd($e);
@@ -122,7 +122,7 @@ class AdminController extends Controller
 
             if ($connectedAdminId !== $user->id) {
                 $user->delete();
-                return redirect()->back()->with('success_message', 'L\'administrateur a été rétiré');
+                return redirect()->back()->with('success_message', 'l\'employé a été rétiré');
             } else {
                 return redirect()->back()->with('error_message', 'Vous ne pouvez pas supprimer votre compte administrateur');
             }
@@ -170,6 +170,18 @@ class AdminController extends Controller
         } catch (Exception $e) {
             //dd($e);
         }
+    }
+
+
+    public function search(Request $request){
+        $name = $request->search;
+
+        if($name == ""){
+            $result = User::paginate(10);
+        }else{
+            $result = User::select('*')->where("name","like", '%' .$name. '%')->paginate(10);
+        }
+        return view('admins/index', ['admins'=>$result]);
     }
 
 }

@@ -27,6 +27,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('dashboard', [AppController::class, 'index'])->name('dashboard');
 
+    Route::get('/attespdf',[AppController::class,'downloadPdf1'])->name("attespdf");
+    Route::get('/contratpdf',[AppController::class,'downloadPdf2'])->name("contratpdf");
 
 
     Route::prefix('departements')->group(function () {
@@ -46,6 +48,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/edit/{absence}', [AbsenceController::class, 'edit'])->name('absence.edit');
         Route::put('/update/{absence}', [AbsenceController::class, 'update'])->name('absence.update');
         Route::get('/{absence}', [AbsenceController::class, 'delete'])->name('absence.delete');
+
+        Route::post('/{absence}/accept', [AbsenceController::class, 'accept'])->name('absences.accept');
+        Route::post('/{absence}/refuse', [AbsenceController::class, 'refuse'])->name('absences.refuse');
+
     });
 
 
@@ -76,6 +82,9 @@ Route::middleware('auth')->group(function () {
         Route::put('/update/{user}', [AdminController::class, 'update'])->name('administrateurs.update');
         Route::post('/create', [AdminController::class, 'store'])->name('administrateurs.store');
         Route::get('/delete/{user}', [AdminController::class, 'delete'])->name('administrateurs.delete');
+
+        Route::get('/search',[AdminController::class,'search'])->name("search");
+
     });
 
 

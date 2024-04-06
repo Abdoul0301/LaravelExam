@@ -81,4 +81,24 @@ class AbsenceController extends Controller
             dd($e);
         }
     }
+
+    public function accept(Absence $absence)
+    {
+        $absence->status = 'valider';
+        $absence->save();
+
+        return redirect()->back()->with('success', 'Absence acceptée avec succès.');
+    }
+
+    public function refuse(Absence $absence)
+    {
+        $absence->status = 'refuser';
+        $absence->save();
+
+        return redirect()->back()->with('success', 'Absence refusée avec succès.');
+    }
+
+
+
+
 }

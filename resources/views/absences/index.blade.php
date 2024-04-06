@@ -55,43 +55,132 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                    @if(auth()->user()->role === 'administrateur')
                         @forelse ($absences as $absence)
-                            @if(auth()->user()->id === $absence->user->id)
-                                <tr>
-                                    <td class="cell">{{ $absence->id}}</td>
-                                    <td class="cell">{{ $absence->user->name}}</td>
-                                    <td class="cell">{{ $absence->type_absences}}</td>
-                                    <td class="cell">{{ $absence->explication}}</td>
-                                    <td class="cell">{{ $absence->date_debut}}</td>
-                                    <td class="cell">{{ $absence->date_fin}}</td>
-                                    <td class="cell"><span class="badge bg-success">{{ $absence->status}}</span></td>
+                            <tr>
+                                <td class="cell">{{ $absence->id}}</td>
+                                <td class="cell">{{ $absence->user->name}}</td>
+                                <td class="cell">{{ $absence->type_absences}}</td>
+                                <td class="cell">{{ $absence->explication}}</td>
+                                <td class="cell">{{ $absence->date_debut}}</td>
+                                <td class="cell">{{ $absence->date_fin}}</td>
+                                <td class="cell">
+                                    @php
+                                        $statusClass = '';
+                                        switch($absence->status) {
+                                            case 'valider':
+                                                $statusClass = 'bg-success';
+                                                break;
+                                            case 'refuser':
+                                                $statusClass = 'bg-danger';
+                                                break;
+                                            case 'attente':
+                                            default:
+                                                $statusClass = 'bg-secondary';
+                                                break;
+                                        }
+                                    @endphp
+                                    <span class="badge {{ $statusClass }}">{{ $absence->status}}</span>
+                                </td>
 
 
-                                    <td class="cell">
-                                        <a class="btn-sm app-btn-secondary"
-                                           href="{{ route('absence.delete', $absence->id) }}">Retirer</a>
+                                <td class="cell">
+                                    <div class="d-flex justify-content-start">
+                                        @if(auth()->user()->role !== 'administrateur')
+                                            <a class="btn-sm app-btn-secondary"
+                                               href="{{ route('absence.edit', $absence->id) }}">Editer</a>
+
+                                        @endif
+
 
                                         @if(auth()->user()->role === 'administrateur')
                                             <!-- Afficher le bouton pour l'administrateur -->
-                                            <a class="btn-sm app-btn-secondary"
-                                               href="{{ route('absence.edit', $absence->id) }}">Editer</a>
+                                            {{--<a class="btn-sm app-btn-secondary"
+                                           href="{{ route('absence.delete', $absence->id) }}">Retirer</a>--}}
+
+
+                                            <form action="{{ route('absences.accept', $absence->id) }}" method="POST" class="mr-2">
+                                                @csrf
+                                                <button type="submit" class="btn-sm app-btn-secondary">Valider</button>
+                                            </form>
+
+                                            <form action="{{ route('absences.refuse', $absence->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn-sm app-btn-secondary">Refuser</button>
+                                            </form>
+
                                         @endif
+                                    </div>
 
-                                    </td>
+                                </td>
 
-                                </tr>
-                            @endif
-                            @if(auth()->user()->id !== $absence->user->id)
-                                <tr>
-                                    <td class="cell" colspan="4">Aucun demande d'absence lier à {{auth()->user()->name}} </td>
-
-                                </tr>
-                            @endif
+                            </tr>
                         @empty
 
-                        @endforelse
+                            <tr>
+                                <td class="cell" colspan="2">Aucun absence demander</td>
 
+                            </tr>
+                        @endforelse
+                    @endif
+
+
+
+
+
+                    @forelse ($absences as $absence)
+                        @if(auth()->user()->role !== 'administrateur' && auth()->user()->id === $absence->user_id)
+                            <tr>
+                                <td class="cell">{{ $absence->id}}</td>
+                                <td class="cell">{{ $absence->user->name}}</td>
+                                <td class="cell">{{ $absence->type_absences}}</td>
+                                <td class="cell">{{ $absence->explication}}</td>
+                                <td class="cell">{{ $absence->date_debut}}</td>
+                                <td class="cell">{{ $absence->date_fin}}</td>
+                                <td class="cell">
+                                    @php
+                                        $statusClass = '';
+                                        switch($absence->status) {
+                                            case 'valider':
+                                                $statusClass = 'bg-success';
+                                                break;
+                                            case 'refuser':
+                                                $statusClass = 'bg-danger';
+                                                break;
+                                            case 'attente':
+                                            default:
+                                                $statusClass = 'bg-secondary';
+                                                break;
+                                        }
+                                    @endphp
+                                    <span class="badge {{ $statusClass }}">{{ $absence->status}}</span>
+                                </td>
+                                <td class="cell">
+                                    <div class="d-flex justify-content-start">
+                                        @if(auth()->user()->role !== 'administrateur')
+                                            <a class="btn-sm app-btn-secondary" href="{{ route('absence.edit', $absence->id) }}">Editer</a>
+                                        @endif
+
+                                        @if(auth()->user()->role === 'administrateur')
+                                            <form action="{{ route('absences.accept', $absence->id) }}" method="POST" class="mr-2">
+                                                @csrf
+                                                <button type="submit" class="btn-sm app-btn-secondary">Valider</button>
+                                            </form>
+
+                                            <form action="{{ route('absences.refuse', $absence->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn-sm app-btn-secondary">Refuser</button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr>
+                        @endif
+                    @empty
+                        <tr>
+                            <td class="cell" colspan="2">Aucune absence demandée</td>
+                        </tr>
+                    @endforelse
 
 
                     </tbody>
